@@ -1,16 +1,11 @@
 package com.xh.pay.polling.config;
 
 import com.xh.pay.common.core.constant.Cons;
-import org.apache.activemq.ActiveMQConnectionFactory;
-import org.springframework.beans.factory.annotation.Value;
+import org.messaginghub.pooled.jms.JmsPoolConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.config.SimpleJmsListenerContainerFactory;
-import org.springframework.jms.connection.CachingConnectionFactory;
-import org.springframework.jms.core.JmsTemplate;
-
-import javax.jms.ConnectionFactory;
 
 /**
  * Title: MQ配置 - 消费者
@@ -23,54 +18,30 @@ import javax.jms.ConnectionFactory;
 @Configuration
 public class ActivemqConfig {
 
-    @Value("${spring.activemq.broker-url}")
-    private String brokerUrl;
-
-    @Value("${spring.activemq.user}")
-    private String username;
-
-    @Value("${spring.activemq.password}")
-    private String password;
-
-    @Bean
-    public ConnectionFactory connectionFactory() {
-        return new ActiveMQConnectionFactory(username, password, brokerUrl);
-    }
-
-    @Bean
-    public CachingConnectionFactory cachingConnectionFactory() {
-        return new CachingConnectionFactory(connectionFactory());
-    }
-
-    @Bean
-    public JmsTemplate jmsTemplate() {
-        return new JmsTemplate(cachingConnectionFactory());
-    }
-
     /**
-     * 在Queue模式中，对消息的监听需要对containerFactory进行配置
+     * 点对点模式
      *
-     * @param connectionFactory
+     * @param poolConnectionFactory
      * @return
      */
     @Bean(Cons.QUEUE_LISTENER)
-    public JmsListenerContainerFactory<?> queueJmsListenerContainerFactory(ConnectionFactory connectionFactory) {
+    public JmsListenerContainerFactory<?> queueJmsListenerContainerFactory(JmsPoolConnectionFactory poolConnectionFactory) {
         SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory);
+        factory.setConnectionFactory(poolConnectionFactory);
         factory.setPubSubDomain(false);//监听的是Queue
         return factory;
     }
 
     /**
-     * 在Topic模式中，对消息的监听需要对containerFactory进行配置
+     * 订阅模式
      *
-     * @param connectionFactory
+     * @param poolConnectionFactory
      * @return
      */
     @Bean(Cons.TOPIC_LISTENER)
-    public JmsListenerContainerFactory<?> topicJmsListenerContainerFactory(ConnectionFactory connectionFactory) {
+    public JmsListenerContainerFactory<?> topicJmsListenerContainerFactory(JmsPoolConnectionFactory poolConnectionFactory) {
         SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
-        factory.setConnectionFactory(connectionFactory);
+        factory.setConnectionFactory(poolConnectionFactory);
         factory.setPubSubDomain(true);//监听的是Topic
         return factory;
     }

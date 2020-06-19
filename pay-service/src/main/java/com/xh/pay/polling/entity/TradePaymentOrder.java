@@ -20,42 +20,30 @@ public class TradePaymentOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;// 主键ID.
-    @Column(name = "version")
-    private Integer version = 0;// 版本号默认为0
-    @Column(name = "status")
-    private String status;// 状态 PublicStatusEnum
-    @Column(name = "creater")
-    private String creater;// 创建人.
-    @Column(name = "create_time")
-    private Date createTime = new Date();// 创建时间.
-    @Column(name = "editor")
-    private String editor;// 修改人.
-    @Column(name = "edit_time")
-    private Date editTime;// 修改时间.
-    @Column(name = "product_name")
-    private String productName;//商品名称
+    @Column(name = "merchant_no")
+    private String merchantNo;//商户编号
+    @Column(name = "merchant_name")
+    private String merchantName;//商户名称
     @Column(name = "merchant_order_no")
     private String merchantOrderNo;//商户订单编号
+    @Column(name = "product_name")
+    private String productName;//商品名称
     @Column(name = "order_amount")
     private BigDecimal orderAmount;//订单金额
     @Column(name = "order_from")
     private String orderFrom;//订单来源
-    @Column(name = "merchant_name")
-    private String merchantName;//商户名称
-    @Column(name = "merchant_no")
-    private String merchantNo;//商户编号
     @Column(name = "order_time")
     private Date orderTime;//订单时间
-    @Column(name = "order_date")
-    private Date orderDate;//订单日期
     @Column(name = "order_ip")
     private String orderIp;//订单来源IP
     @Column(name = "order_referer_url")
     private String orderRefererUrl;//页面链接
     @Column(name = "return_url")
-    private String returnUrl;//页面回调通知地址
+    private String returnUrl;//页面回调通知url
     @Column(name = "notify_url")
-    private String notifyUrl;//后台异步通知地址
+    private String notifyUrl;//后台异步通知url
+    @Column(name = "status")
+    private String status;// 状态 PublicStatusEnum
     @Column(name = "cancel_reason")
     private String cancelReason;//订单撤销原因
     @Column(name = "order_period")
@@ -84,6 +72,8 @@ public class TradePaymentOrder {
     private Short refundTimes;//退款次数
     @Column(name = "success_refund_amount")
     private BigDecimal successRefundAmount;//成功退款金额
+    @Column(name = "create_time")
+    private Date createTime = new Date();// 创建时间.
 
     public Long getId() {
         return id;
@@ -93,60 +83,20 @@ public class TradePaymentOrder {
         this.id = id;
     }
 
-    public Integer getVersion() {
-        return version;
+    public String getMerchantNo() {
+        return merchantNo;
     }
 
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setMerchantNo(String merchantNo) {
+        this.merchantNo = merchantNo;
     }
 
-    public String getStatus() {
-        return status;
+    public String getMerchantName() {
+        return merchantName;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getCreater() {
-        return creater;
-    }
-
-    public void setCreater(String creater) {
-        this.creater = creater;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getEditor() {
-        return editor;
-    }
-
-    public void setEditor(String editor) {
-        this.editor = editor;
-    }
-
-    public Date getEditTime() {
-        return editTime;
-    }
-
-    public void setEditTime(Date editTime) {
-        this.editTime = editTime;
-    }
-
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setMerchantName(String merchantName) {
+        this.merchantName = merchantName;
     }
 
     public String getMerchantOrderNo() {
@@ -155,6 +105,14 @@ public class TradePaymentOrder {
 
     public void setMerchantOrderNo(String merchantOrderNo) {
         this.merchantOrderNo = merchantOrderNo;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public BigDecimal getOrderAmount() {
@@ -173,36 +131,12 @@ public class TradePaymentOrder {
         this.orderFrom = orderFrom;
     }
 
-    public String getMerchantName() {
-        return merchantName;
-    }
-
-    public void setMerchantName(String merchantName) {
-        this.merchantName = merchantName;
-    }
-
-    public String getMerchantNo() {
-        return merchantNo;
-    }
-
-    public void setMerchantNo(String merchantNo) {
-        this.merchantNo = merchantNo;
-    }
-
     public Date getOrderTime() {
         return orderTime;
     }
 
     public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
     }
 
     public String getOrderIp() {
@@ -235,6 +169,14 @@ public class TradePaymentOrder {
 
     public void setNotifyUrl(String notifyUrl) {
         this.notifyUrl = notifyUrl;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCancelReason() {
@@ -347,5 +289,13 @@ public class TradePaymentOrder {
 
     public void setSuccessRefundAmount(BigDecimal successRefundAmount) {
         this.successRefundAmount = successRefundAmount;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

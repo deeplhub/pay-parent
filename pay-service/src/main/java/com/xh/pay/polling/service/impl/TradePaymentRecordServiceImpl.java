@@ -45,6 +45,7 @@ public class TradePaymentRecordServiceImpl implements TradePaymentRecordService 
 
     /**
      * 处理交易记录 如果交易记录是成功或者本地未支付,查询上游已支付,返回TRUE 如果上游支付结果为未支付,返回FALSE
+     *
      * @param bankOrderNo 银行订单号
      * @return
      */
@@ -137,7 +138,6 @@ public class TradePaymentRecordServiceImpl implements TradePaymentRecordService 
         paramMap.put("orderPrice", tradePaymentRecord.getOrderAmount());// 订单金额 ,单位:元
         paramMap.put("payWayCode", tradePaymentRecord.getPayWayCode());// 支付方式编码 支付宝:ALIPAY/微信:WEIXIN
         paramMap.put("tradeStatus", tradeStatus);// 交易状态
-        paramMap.put("orderDate", new SimpleDateFormat("yyyyMMdd").format(tradePaymentOrder.getOrderDate()));// 订单日期
         paramMap.put("orderTime", new SimpleDateFormat("yyyyMMddHHmmss").format(tradePaymentOrder.getOrderTime()));// 订单时间
         String remark = tradePaymentRecord.getRemark(); // 支付备注
         paramMap.put("remark", remark);
