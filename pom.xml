@@ -30,7 +30,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <commons.lang3.version>3.8.1</commons.lang3.version>
         <commons.io.version>2.6</commons.io.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <spring.boot.version>2.2.7.RELEASE</spring.boot.version>
         <druid.version>1.1.21</druid.version>
         <mysql.version>8.0.18</mysql.version>
