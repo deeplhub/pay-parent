@@ -33,7 +33,7 @@
         <junit.version>4.12</junit.version>
         <spring.boot.version>2.2.7.RELEASE</spring.boot.version>
         <druid.version>1.1.21</druid.version>
-        <mysql.version>8.0.18</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <fastjson.version>1.2.69</fastjson.version>
     </properties>
 
